@@ -3,17 +3,15 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.todo.domain.global.BaseEntity;
 import org.todo.domain.image.entity.Image;
 import org.todo.domain.todo.entity.Todo;
-
-import java.time.LocalDateTime;
-
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "post")
-public class Post {
+public class Post extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +26,4 @@ public class Post {
 
     @Column(nullable = false)
     private String content;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
 }
