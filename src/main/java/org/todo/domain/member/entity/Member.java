@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.todo.domain.global.BaseEntity;
+import org.todo.domain.member.dto.req.SignupRequestDto;
 import org.todo.domain.todo.entity.Todo;
 
 import java.time.LocalDate;
@@ -15,9 +16,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Builder
 @Entity
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
@@ -42,7 +43,8 @@ public class Member extends BaseEntity implements UserDetails {
     private LocalDate birth;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @OneToMany(mappedBy = "member")
     private List<Todo> todos = new ArrayList<>();
@@ -75,4 +77,18 @@ public class Member extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() { return true; }
+
+    @Builder
+    public Member(SignupRequestDto req, String encodedPwd){
+        this.email = req.getEmail();
+        this.password = encodedPwd;
+        this.username = req.getUsername();
+        this.nickname = req.getNickname();
+        this.birth = req.getBirth();
+        this.gender = Gender.valueOf(req.getGender());
+    }
+
+    public String getEncodedPW(){
+        return this.password;
+    }
 }

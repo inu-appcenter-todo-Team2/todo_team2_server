@@ -12,6 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.todo.global.security.jwt.JwtTokenProvider;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -19,8 +21,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    private final List<String> whiteListUri = Arrays.asList(
+            "/api/v1/auth"
+    );
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if(isWhiteListUri(request.getRequestURI())){
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = jwtTokenProvider.getJwtFromRequest(request);
 
         if(jwtTokenProvider.validateToken(token)){
@@ -29,5 +40,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request,response);
+    }
+
+    private boolean isWhiteListUri(String uri){
+        return whiteListUri.stream()
+                .anyMatch(uri::startsWith);
     }
 }

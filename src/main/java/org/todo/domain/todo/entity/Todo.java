@@ -7,8 +7,6 @@ import org.todo.domain.global.BaseEntity;
 import org.todo.domain.member.entity.Member;
 import org.todo.domain.post.entity.Post;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

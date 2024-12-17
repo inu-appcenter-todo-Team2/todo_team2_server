@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/todos")
 public class TodoController {
-
     /**
      * FEAT 1) 투두 추가하기
      * FEAT 2) 투두 수정하기
@@ -19,6 +18,6 @@ public class TodoController {
      * FEAT 5) 투두 공유하기
      * FEAT 6) 투두 색상 선택하기
      * FEAT 7) 투두 일별 조회하기
+     * FEAT 8) 투두 전체 조회하기
      */
-
 }
