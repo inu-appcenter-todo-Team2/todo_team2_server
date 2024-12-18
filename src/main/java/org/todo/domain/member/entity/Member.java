@@ -40,11 +40,17 @@ public class Member extends BaseEntity implements UserDetails {
     private String nickname;
 
     @Column(nullable = false)
+    private String statusMessage;
+
+    @Column(nullable = false)
     private LocalDate birth;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column(nullable = false)
+    private String personalColor;
 
     @OneToMany(mappedBy = "member")
     private List<Todo> todos = new ArrayList<>();
@@ -84,11 +90,21 @@ public class Member extends BaseEntity implements UserDetails {
         this.password = encodedPwd;
         this.username = req.getUsername();
         this.nickname = req.getNickname();
+        this.statusMessage = req.getStatusMessage();
         this.birth = req.getBirth();
         this.gender = Gender.valueOf(req.getGender());
+        this.personalColor = req.getPersonalColor();
     }
 
     public String getEncodedPW(){
         return this.password;
+    }
+
+    public void updatePersonalColor(String personalColor){
+        this.personalColor = personalColor;
+    }
+
+    public void updateStatusMessage(String statusMessage){
+        this.statusMessage = statusMessage;
     }
 }

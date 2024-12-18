@@ -33,11 +33,19 @@ public class SignupRequestDto {
     @NotBlank(message = "닉네임은 공백이 될 수 없습니다.")
     private String nickname;
 
+    @Schema(description = "유저 상태메시지", example = "BE Developer")
+    @NotBlank(message = "상태메시지는 공백이 될 수 없습니다.")
+    private String statusMessage;
+
     @Schema(description = "유저 생일", example = "2001-05-20")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
 
     @Schema(description = "유저 성별", example = "남성/여성")
-    @Pattern(regexp = "^(MALE|FEMALE)$")
+    @Pattern(regexp = "^(MALE|FEMALE)$", message = "유효한 성별이 아닙니다.")
     private String gender;
+
+    @Schema(description = "유저 선택 색상", example = "#111111")
+    @Pattern(regexp = "^#[0-9A-Fa-f]{6}$", message = "유효한 HEX 코드가 아닙니다.")
+    private String personalColor;
 }

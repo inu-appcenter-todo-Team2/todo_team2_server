@@ -1,5 +1,6 @@
 package org.todo.domain.member.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional
     public SignupResponseDto signup(SignupRequestDto req){
 
         checkEmailDuplicated(req.getEmail());
@@ -38,6 +40,7 @@ public class MemberService {
                 .build();
     }
 
+    @Transactional
     public LoginResponseDto login(LoginRequestDto req){
         Member member = memberRepository.findByEmail(req.getEmail())
                 .orElseThrow(() -> new RestApiException(CustomErrorCode.LOGIN_MEMBER_NOT_FOUND));
@@ -53,6 +56,7 @@ public class MemberService {
                 .build();
     }
 
+    @Transactional
     public Boolean checkEmailDuplicated(String email){
         if(memberRepository.existsByEmail(email))
             throw new RestApiException(CustomErrorCode.EMAIL_DUPLICATED);
@@ -60,10 +64,21 @@ public class MemberService {
         return true;
     }
 
+    @Transactional
     public Boolean checkNicknameDuplicated(String nickname){
         if(memberRepository.existsByNickname(nickname))
             throw new RestApiException(CustomErrorCode.NICKNAME_DUPLICATED);
 
         return true;
+    }
+
+    @Transactional
+    public String updatePersonalColor(Member member, String colorCode){
+        Member newMember = memberRepository.findById(member.getId())
+                .orElseThrow(() -> new RestApiException(CustomErrorCode.LOGIN_MEMBER_NOT_FOUND));
+
+        newMember.updatePersonalColor(colorCode);
+
+        return colorCode;
     }
 }

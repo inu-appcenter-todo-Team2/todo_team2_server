@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
 
     @CreatedDate
-    @DateTimeFormat(pattern = "yyyyMMdd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @DateTimeFormat(pattern = "yyyyMMdd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime updatedAt;
 }

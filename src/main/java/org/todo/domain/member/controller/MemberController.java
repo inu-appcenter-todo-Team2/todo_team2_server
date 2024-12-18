@@ -20,12 +20,12 @@ import org.todo.domain.member.service.MemberService;
 @RequestMapping("/api/v1/auth")
 public class MemberController {
     /**
-     * FEAT 1) 회원가입
-     * FEAT 1-1) 이메일 중복체크
-     * FEAT 1-2) 닉네임 중복체크
-     * FEAT 1-3) 회원가입
+     * FEAT 1) 회원가입 ✅
+     * FEAT 1-1) 이메일 중복체크 ✅
+     * FEAT 1-2) 닉네임 중복체크 ✅
+     * FEAT 1-3) 회원가입 ✅
      *
-     * FEAT 2) 로그인
+     * FEAT 2) 로그인 ✅
      * FEAT 3) 로그아웃
      */
 
