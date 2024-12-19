@@ -20,11 +20,14 @@ public enum CustomErrorCode implements ErrorCode{
     TODO_PERMISSION_DENIED(HttpStatus.FORBIDDEN, 403, "[투두] 수정/삭제 권한 없음"),
     TODO_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[투두] 투두 조회 실패"),
 
+    // Posts Exception
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[포스팅] 포스팅 조회 실패"),
+
     // jwt Exception
     JWT_NOT_VALID(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않는 Jwt"),
 
     // Valid Exception
-    INVALID_PARAMS(HttpStatus.BAD_REQUEST, 400, "Validation Failed");
+    INVALID_PARAMS(HttpStatus.BAD_REQUEST, 400, "[요청] RequestBody 유효성 검사 실패");
 
 
     private final HttpStatus httpStatus;

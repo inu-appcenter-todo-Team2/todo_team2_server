@@ -39,7 +39,7 @@ public class Todo extends BaseEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToOne(mappedBy = "todo")
+    @OneToOne(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
     private Post post;
 
     @Builder

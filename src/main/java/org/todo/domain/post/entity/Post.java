@@ -1,14 +1,14 @@
 package org.todo.domain.post.entity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.todo.domain.global.BaseEntity;
 import org.todo.domain.image.entity.Image;
 import org.todo.domain.todo.entity.Todo;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "post")
 public class Post extends BaseEntity {
@@ -20,10 +20,7 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "todo_id", nullable = false, unique = true)
     private Todo todo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "image_id", unique = true)
     private Image image;
-
-    @Column(nullable = false)
-    private String content;
 }

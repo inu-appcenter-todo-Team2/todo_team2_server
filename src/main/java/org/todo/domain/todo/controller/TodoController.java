@@ -32,7 +32,6 @@ public class TodoController {
      * FEAT 2) 투두 수정하기 ✅
      * FEAT 3) 투두 삭제하기 ✅
      * FEAT 4) 투두 완료/미완료 처리 ✅
-     * FEAT 5) 투두 공유하기
      * FEAT 6) 투두 색상 선택하기 ✅
      * FEAT 7) 투두 날짜별 조회하기 ✅
      * FEAT 8) 투두 월별 조회하기 ✅
