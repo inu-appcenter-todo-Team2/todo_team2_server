@@ -75,7 +75,7 @@ public class MemberService {
     @Transactional
     public String updatePersonalColor(Member member, String colorCode){
         Member newMember = memberRepository.findById(member.getId())
-                .orElseThrow(() -> new RestApiException(CustomErrorCode.LOGIN_MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new RestApiException(CustomErrorCode.MEMBER_NOT_FOUND));
 
         newMember.updatePersonalColor(colorCode);
 

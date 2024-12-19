@@ -15,6 +15,7 @@ public enum CustomErrorCode implements ErrorCode{
     PASSWORD_NOT_CORRECT(HttpStatus.BAD_REQUEST, 400, "[로그인] 비밀번호 불일치"),
     EMAIL_DUPLICATED(HttpStatus.BAD_REQUEST, 400, "[회원가입] 이메일 중복"),
     NICKNAME_DUPLICATED(HttpStatus.BAD_REQUEST, 400, "[회원가입] 닉네임 중복"),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[서비스] 존재하지 않는 맴버"),
 
     // Todos Exception
     TODO_PERMISSION_DENIED(HttpStatus.FORBIDDEN, 403, "[투두] 수정/삭제 권한 없음"),
