@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum CustomErrorCode implements ErrorCode{
     // Server Exception
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "Internal Server Error"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "[서버]Internal Server Error"),
 
     // Member Exception
     LOGIN_MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[로그인] 존재하지 않는 이메일"),
@@ -21,8 +21,10 @@ public enum CustomErrorCode implements ErrorCode{
     TODO_PERMISSION_DENIED(HttpStatus.FORBIDDEN, 403, "[투두] 수정/삭제 권한 없음"),
     TODO_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[투두] 투두 조회 실패"),
 
+
     // Posts Exception
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[포스팅] 포스팅 조회 실패"),
+    POST_TODO_NOT_DONE(HttpStatus.BAD_REQUEST, 404, "[포스팅] 포스트 생성 실패 - 투두 미완료"),
 
     // jwt Exception
     JWT_NOT_VALID(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않는 Jwt"),
