@@ -46,7 +46,7 @@ public class PostService {
             throw new RestApiException(CustomErrorCode.TODO_PERMISSION_DENIED);
 
         if(!todo.getDone())
-            throw new RestApiException(CustomErrorCode.TODO_NOT_DONE);
+            throw new RestApiException(CustomErrorCode.POST_TODO_NOT_DONE);
 
         Post post = Post.builder()
                 .todo(todo)
