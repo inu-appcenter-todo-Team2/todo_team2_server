@@ -1,5 +1,6 @@
 package org.todo.domain.member.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.todo.domain.member.dto.res.UserInfoResponseDto;
 import org.todo.domain.member.entity.Member;
 import org.todo.domain.member.service.MypageService;
 
+@Tag(name = "마이페이지", description = "마이페이지 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor

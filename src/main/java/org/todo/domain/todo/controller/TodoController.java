@@ -1,5 +1,6 @@
 package org.todo.domain.todo.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import org.todo.domain.todo.service.TodoService;
 import java.time.LocalDate;
 import java.util.List;
 
+@Tag(name = "투두", description = "투두 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor

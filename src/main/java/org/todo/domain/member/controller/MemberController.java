@@ -1,5 +1,6 @@
 package org.todo.domain.member.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.todo.domain.member.dto.res.LoginResponseDto;
 import org.todo.domain.member.dto.res.SignupResponseDto;
 import org.todo.domain.member.service.MemberService;
 
+@Tag(name = "맴버 로그인/회원가입", description = "맴버 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor

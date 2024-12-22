@@ -1,5 +1,6 @@
 package org.todo.domain.post.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.todo.domain.post.service.PostService;
 import org.todo.domain.s3.dto.res.PresignedUrlResponseDto;
 import org.todo.domain.s3.service.S3Service;
 
+@Tag(name = "포스팅", description = "포스팅 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
