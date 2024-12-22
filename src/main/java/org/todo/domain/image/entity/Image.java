@@ -3,7 +3,6 @@ package org.todo.domain.image.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.todo.domain.global.BaseEntity;
-import org.todo.domain.post.entity.Post;
 
 @Entity
 @Getter

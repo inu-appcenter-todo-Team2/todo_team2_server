@@ -17,6 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.todo.global.exception.handler.CustomAccessDeniedHandler;
 import org.todo.global.exception.handler.CustomAuthenticationEntryPoint;
 import org.todo.global.security.filter.JwtAuthenticationFilter;
+import org.todo.global.security.filter.JwtExceptionFilter;
 import org.todo.global.security.jwt.JwtTokenProvider;
 
 import java.util.List;
@@ -49,7 +50,8 @@ public class SecurityConfig {
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

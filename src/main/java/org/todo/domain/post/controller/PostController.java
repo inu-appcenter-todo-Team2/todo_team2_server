@@ -1,6 +1,5 @@
 package org.todo.domain.post.controller;
 
-import com.amazonaws.services.s3.transfer.Upload;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +22,6 @@ import org.todo.domain.s3.service.S3Service;
 @RequestMapping("/api/v1/post")
 public class PostController {
 
-    /**
-     * Feat 0) PresignedUrl 발급받기
-     * Feat 1) 투두 공유하기
-     * Feat 2) 포스팅 삭제하기
-     * Feat 3) 포스팅 불러오기
-     */
     private final PostService postService;
     private final S3Service s3Service;
 

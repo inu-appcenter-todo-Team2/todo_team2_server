@@ -6,7 +6,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.todo.domain.image.entity.Image;
 import org.todo.domain.image.repository.ImageRepository;
 import org.todo.domain.member.entity.Member;
 import org.todo.domain.s3.dto.res.PresignedUrlResponseDto;
