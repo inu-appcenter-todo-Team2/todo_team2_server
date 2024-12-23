@@ -1,6 +1,7 @@
 package org.todo.global.security.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.todo.global.error.CustomErrorCode;
+import org.todo.global.exception.CustomJwtException;
 
 import java.security.Key;
 import java.util.Date;
@@ -69,16 +72,14 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token)
                     .getBody();
             return true;
-        } catch (SecurityException e) {
-            throw new JwtException("Invalid JWT signature");
-        } catch (MalformedJwtException e) {
-            throw new JwtException("Invalid JWT token format");
         } catch (ExpiredJwtException e) {
-            throw new JwtException("Expired JWT token");
+            throw new CustomJwtException(CustomErrorCode.JWT_EXPIRED);
+        } catch (MalformedJwtException e) {
+            throw new CustomJwtException(CustomErrorCode.JWT_MALFORMED);
+        } catch (SignatureException | SecurityException e) {
+            throw new CustomJwtException(CustomErrorCode.JWT_SIGNATURE);
         } catch (UnsupportedJwtException e) {
-            throw new JwtException("Unsupported JWT token");
-        } catch (IllegalStateException e) {
-            throw new JwtException("JWT token internal error occurred");
+            throw new CustomJwtException(CustomErrorCode.JWT_UNSUPPORTED);
         }
     }
 

@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.todo.global.exception.CustomJwtException;
 import org.todo.global.security.jwt.JwtTokenProvider;
 
 import java.io.IOException;
@@ -42,14 +43,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        try{
+            String token = jwtTokenProvider.getJwtFromRequest(request);
 
-        String token = jwtTokenProvider.getJwtFromRequest(request);
+            if(token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication authentication = jwtTokenProvider.getAuthenticationJwt(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
 
-        if(token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication authentication = jwtTokenProvider.getAuthenticationJwt(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            filterChain.doFilter(request, response);
+        } catch (CustomJwtException e){
+            throw e;
         }
-
-        filterChain.doFilter(request, response);
     }
 }

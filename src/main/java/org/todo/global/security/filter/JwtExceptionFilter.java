@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.todo.global.error.CustomErrorCode;
 import org.todo.global.error.ErrorResponse;
+import org.todo.global.exception.CustomJwtException;
 
 
 import java.io.IOException;
@@ -20,21 +20,20 @@ public class JwtExceptionFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try{
             filterChain.doFilter(request, response);
-        }catch (JwtException e){
+        }catch (CustomJwtException e){
             setErrorResponse(request, response, e);
         }
     }
 
-    public void setErrorResponse(HttpServletRequest request, HttpServletResponse response, JwtException e) throws IOException {
-
+    public void setErrorResponse(HttpServletRequest request, HttpServletResponse response, CustomJwtException e) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         ErrorResponse<String> errorResponse = new ErrorResponse<>(
-                405,
-                e.getMessage()
+                e.getErrorCode().getCode(),
+                e.getErrorCode().getMessage()
         );
 
         response.getWriter().write(objectMapper.writeValueAsString(errorResponse));

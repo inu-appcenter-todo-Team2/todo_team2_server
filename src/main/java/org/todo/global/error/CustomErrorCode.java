@@ -27,7 +27,11 @@ public enum CustomErrorCode implements ErrorCode{
     POST_TODO_NOT_DONE(HttpStatus.BAD_REQUEST, 404, "[포스팅] 포스트 생성 실패 - 투두 미완료"),
 
     // jwt Exception
-    JWT_NOT_VALID(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않는 Jwt"),
+    JWT_NOT_VALID(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않은 Jwt"),
+    JWT_EXPIRED(HttpStatus.UNAUTHORIZED, 419, "[Jwt] 만료된 토큰입니다"),
+    JWT_MALFORMED(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 잘못된 토큰 형식입니다"),
+    JWT_SIGNATURE(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않은 서명입니다"),
+    JWT_UNSUPPORTED(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 지원하지 않는 토큰입니다"),
 
     // Valid Exception
     INVALID_PARAMS(HttpStatus.BAD_REQUEST, 400, "[요청] RequestBody 유효성 검사 실패");
