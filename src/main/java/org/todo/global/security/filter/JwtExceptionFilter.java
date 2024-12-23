@@ -33,7 +33,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter{
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         ErrorResponse<String> errorResponse = new ErrorResponse<>(
-                Integer.valueOf(CustomErrorCode.JWT_NOT_VALID.toString()),
+                405,
                 e.getMessage()
         );
 
