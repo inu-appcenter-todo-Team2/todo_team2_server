@@ -2,6 +2,7 @@ package org.todo.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.todo.domain.member.dto.req.UpdateStatusMessageRequestDto;
 import org.todo.domain.member.dto.res.UserInfoResponseDto;
 import org.todo.domain.member.entity.Member;
@@ -23,6 +24,7 @@ public class MypageService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
+    @Transactional
     public UserInfoResponseDto getUserInfo(Member member){
 
         List<PostResponseDto> posts = postRepository.findAllByMemberIdOrderByIdDesc(member.getId()).stream()
@@ -45,6 +47,7 @@ public class MypageService {
                 .build();
     }
 
+    @Transactional
     public Boolean updateStatusMessage(Member member, UpdateStatusMessageRequestDto req){
         Member nMember = memberRepository.findById(member.getId())
                 .orElseThrow(() -> new RestApiException(CustomErrorCode.MEMBER_NOT_FOUND));
