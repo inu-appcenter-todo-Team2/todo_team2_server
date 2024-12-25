@@ -85,5 +85,14 @@ jobs:
             echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" > .env
             echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
             
-            docker-compose down
+            if [ "$(docker ps -aq -f name=appcenter-todo-server)" ]; then
+              docker stop appcenter-todo-server
+              docker rm appcenter-todo-server
+            fi
+            
+            if [ "$(docker ps -aq -f name=act-redis)" ]; then
+              docker stop act-redis
+              docker rm act-redis
+            fi
+
             docker-compose up -d
