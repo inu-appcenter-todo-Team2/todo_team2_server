@@ -1,4 +1,4 @@
-package org.todo.global.security.filter;
+package org.todo.global.security.jwt.filter;
 
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;

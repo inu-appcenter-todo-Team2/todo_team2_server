@@ -1,4 +1,4 @@
-package org.todo.global.security.filter;
+package org.todo.global.security.jwt.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.todo.global.exception.CustomJwtException;
-import org.todo.global.security.jwt.JwtTokenProvider;
+import org.todo.global.security.jwt.util.JwtTokenProvider;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try{
             String token = jwtTokenProvider.getJwtFromRequest(request);
 
-            if(token != null && jwtTokenProvider.validateToken(token)) {
+            if(token != null && jwtTokenProvider.validateAccessToken(token)) {
                 Authentication authentication = jwtTokenProvider.getAuthenticationJwt(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

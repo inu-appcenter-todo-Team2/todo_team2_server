@@ -13,7 +13,7 @@ import org.todo.domain.member.entity.Member;
 import org.todo.domain.member.repository.MemberRepository;
 import org.todo.global.error.CustomErrorCode;
 import org.todo.global.exception.RestApiException;
-import org.todo.global.security.jwt.JwtTokenProvider;
+import org.todo.global.security.jwt.util.JwtTokenProvider;
 
 @Slf4j
 @Service

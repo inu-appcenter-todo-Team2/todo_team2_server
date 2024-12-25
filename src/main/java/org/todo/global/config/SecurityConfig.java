@@ -15,10 +15,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.todo.global.exception.handler.CustomAccessDeniedHandler;
-import org.todo.global.exception.handler.CustomAuthenticationEntryPoint;
-import org.todo.global.security.filter.JwtAuthenticationFilter;
-import org.todo.global.security.filter.JwtExceptionFilter;
-import org.todo.global.security.jwt.JwtTokenProvider;
+import org.todo.global.security.jwt.filter.JwtAuthenticationFilter;
+import org.todo.global.security.jwt.filter.JwtExceptionFilter;
+import org.todo.global.security.jwt.util.JwtTokenProvider;
 
 import java.util.List;
 

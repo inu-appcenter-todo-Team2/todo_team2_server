@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.todo.domain.global.ResponseDto;
 import org.todo.domain.member.dto.req.LoginRequestDto;
+import org.todo.domain.member.dto.req.RefreshTokenRequestDto;
 import org.todo.domain.member.dto.req.SignupRequestDto;
 import org.todo.domain.member.dto.res.LoginResponseDto;
 import org.todo.domain.member.dto.res.SignupResponseDto;
 import org.todo.domain.member.service.MemberService;
+import org.todo.global.security.jwt.util.JwtTokenProvider;
 
 @Tag(name = "맴버 로그인/회원가입", description = "맴버 관련 API")
 @Slf4j
@@ -22,6 +24,7 @@ import org.todo.domain.member.service.MemberService;
 public class MemberController {
 
     private final MemberService memberService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/signup")
     public ResponseEntity<ResponseDto<SignupResponseDto>> signup(@Valid @RequestBody SignupRequestDto req){
@@ -39,8 +42,13 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDto<LoginResponseDto>> login(@RequestBody LoginRequestDto req){
+    public ResponseEntity<ResponseDto<LoginResponseDto>> login(@Valid @RequestBody LoginRequestDto req){
         return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.of(memberService.login(req), "로그인 성공"));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<ResponseDto<LoginResponseDto>> getRefreshedToken(@Valid @RequestBody RefreshTokenRequestDto req){
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.of(jwtTokenProvider.getNewToken(req), "토큰 재발급 성공"));
     }
 
 //    @PostMapping("/logout")

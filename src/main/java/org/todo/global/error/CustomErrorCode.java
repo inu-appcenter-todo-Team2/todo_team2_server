@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum CustomErrorCode implements ErrorCode{
     // Server Exception
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "[서버]Internal Server Error"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "[서버] Internal Server Error"),
 
     // Member Exception
     LOGIN_MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[로그인] 존재하지 않는 이메일"),
@@ -24,14 +24,17 @@ public enum CustomErrorCode implements ErrorCode{
 
     // Posts Exception
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[포스팅] 포스팅 조회 실패"),
-    POST_TODO_NOT_DONE(HttpStatus.BAD_REQUEST, 404, "[포스팅] 포스트 생성 실패 - 투두 미완료"),
+    POST_TODO_NOT_DONE(HttpStatus.BAD_REQUEST, 404, "[포스팅] 포스트 생성 실패 : 투두 미완료"),
 
     // jwt Exception
     JWT_NOT_VALID(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않은 Jwt"),
-    JWT_EXPIRED(HttpStatus.UNAUTHORIZED, 419, "[Jwt] 만료된 토큰입니다"),
+    JWT_ACCESS_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, 419, "[Jwt] 만료된 엑세스 토큰입니다"),
+    JWT_REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, 420, "[Jwt] 만료된 리프레시 토큰입니다"),
     JWT_MALFORMED(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 잘못된 토큰 형식입니다"),
     JWT_SIGNATURE(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 유효하지 않은 서명입니다"),
     JWT_UNSUPPORTED(HttpStatus.UNAUTHORIZED, 401, "[Jwt] 지원하지 않는 토큰입니다"),
+    JWT_NOT_FOUND(HttpStatus.NOT_FOUND, 404, "[Jwt] 리프레시 토큰 조회 실패"),
+    JWT_NOT_MATCH(HttpStatus.BAD_REQUEST, 400, "[Jwt] 리프레시 토큰 불일치"),
 
     // Valid Exception
     INVALID_PARAMS(HttpStatus.BAD_REQUEST, 400, "[요청] RequestBody 유효성 검사 실패");
