@@ -93,6 +93,9 @@ public class JwtTokenProvider {
 
     public String getJwtFromRequest(HttpServletRequest request){
         log.info("Uri = {}", request.getRequestURI());
+        log.info("PathInfo = {}", request.getPathInfo());
+        log.info("method = {}", request.getMethod());
+
         return request
                 .getHeader("Authorization")
                 .substring(7);
