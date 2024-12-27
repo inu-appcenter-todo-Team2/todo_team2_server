@@ -26,7 +26,7 @@ import java.util.Objects;
 @Component
 public class JwtTokenProvider {
 
-    private static final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 60 * 1000L;
+    private static final long ACCESS_TOKEN_EXPIRED_TIME = 100 * 60 * 60 * 1000L;
     private static final long REFRESH_TOKEN_EXPIRED_TIME = 3 * 24 * 60 * 60 * 1000L;
 
     private final Key key;
