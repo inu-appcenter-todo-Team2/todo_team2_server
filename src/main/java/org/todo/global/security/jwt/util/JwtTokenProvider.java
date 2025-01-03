@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.todo.domain.member.dto.req.RefreshTokenRequestDto;
 import org.todo.domain.member.dto.res.LoginResponseDto;
+import org.todo.domain.member.service.CustomUserDetailService;
 import org.todo.global.error.CustomErrorCode;
 import org.todo.global.exception.CustomJwtException;
 import org.todo.global.security.jwt.entity.RefreshToken;
@@ -31,12 +32,12 @@ public class JwtTokenProvider {
 
     private final Key key;
 
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailService customUserDetailService;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public JwtTokenProvider(@Value("${jwt.secret}")String jwtSecret, UserDetailsService userDetailsService, RefreshTokenRepository refreshTokenRepository){
+    public JwtTokenProvider(@Value("${jwt.secret}")String jwtSecret, CustomUserDetailService customUserDetailService, RefreshTokenRepository refreshTokenRepository){
         this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
-        this.userDetailsService = userDetailsService;
+        this.customUserDetailService = customUserDetailService;
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
@@ -134,7 +135,7 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthenticationJwt(String token){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(getUsernameFromJwt(token));
+        UserDetails userDetails = customUserDetailService.loadUserByUsername(getUsernameFromJwt(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
